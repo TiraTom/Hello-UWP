@@ -28,7 +28,6 @@ namespace XAML_HelloWorld
 		public MainPage()
 		{
 			this.InitializeComponent();
-
 		}
 	}
 
@@ -39,8 +38,7 @@ namespace XAML_HelloWorld
 		public string ButtonLabel { get; set; } = "Speak!";
 
 
-
-		public bool IsEmptyLibretto() => string.IsNullOrWhiteSpace(this.Libretto) ? false : true;
+		public bool IsValidLibretto() => string.IsNullOrWhiteSpace(this.Libretto) ? false : true;
 
 		public async void Button_Click(object sernder, RoutedEventArgs e)
 		{
@@ -49,7 +47,7 @@ namespace XAML_HelloWorld
 				throw new ArgumentNullException(nameof(e));
 			}
 
-			if (!IsEmptyLibretto())
+			if (!IsValidLibretto())
 			{
 				Libretto = "文章を 入れてよ！";
 			}
@@ -59,7 +57,6 @@ namespace XAML_HelloWorld
 			Windows.Media.SpeechSynthesis.SpeechSynthesisStream stream = await synth.SynthesizeTextToStreamAsync(Libretto);
 			mediaElement.SetSource(stream, stream.ContentType);
 			mediaElement.Play();
-
 		}
 	}
 }
